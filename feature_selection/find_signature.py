@@ -38,6 +38,28 @@ labels_train   = labels_train[:150]
 
 
 ### your code goes here
+from sklearn.tree import DecisionTreeClassifier
+
+clf = DecisionTreeClassifier()
+clf.fit(features_train, labels_train)
+
+accuracy = clf.score(features_test, labels_test)
+
+print accuracy
+
+feat_imp = clf.feature_importances_
+print len(feat_imp)
+print feat_imp[0]
+count = 0
+where = []
+for feat in feat_imp:
+    if feat > 0.09:
+        print "number: ", count, ", importance: ", feat
+        where.append(count)
+    count+=1
+
+for i in where:
+    print vectorizer.get_feature_names()[i]
 
 
 
