@@ -19,4 +19,11 @@ import pickle
 
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r"))
 
+print len(enron_data)
+n_poi = 0
+for i in enron_data.keys():
+    n_poi += enron_data[i]['poi']
+
+print n_poi
+
 
