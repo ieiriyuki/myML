@@ -36,7 +36,6 @@ features_train = features_train[:150].toarray()
 labels_train   = labels_train[:150]
 
 
-
 ### your code goes here
 from sklearn.tree import DecisionTreeClassifier
 
@@ -60,6 +59,5 @@ for feat in feat_imp:
 
 for i in where:
     print vectorizer.get_feature_names()[i]
-
 
 
