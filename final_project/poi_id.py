@@ -23,6 +23,12 @@ data_dict.pop('TOTAL')
 #print(data_dict['GLISAN JR BEN F'])
 
 ### Task 2: Remove outliers
+data_nona = {}
+dict_keys = data_dict['GLISAN JR BEN F'].keys()
+print dict_keys.sort
+#for key in data_dict.keys():
+
+
 ### Task 3: Create new feature(s)
 ### Store to my_dataset for easy export below.
 my_dataset = data_dict
