@@ -6,26 +6,49 @@ sys.path.append("../tools/")
 
 from feature_format import featureFormat, targetFeatureSplit
 from tester import dump_classifier_and_data
+import numpy as np
+import matplotlib.pyplot as plt
 
 ### Task 1: Select what features you'll use.
 ### features_list is a list of strings, each of which is a feature name.
 ### The first feature must be "poi".
-features_list = ['poi','salary', 'to_messages', 'deferral_payments', 'total_payments', 'exercised_stock_options', 'bonus', 'restricted_stock', 'shared_receipt_with_poi', 'restricted_stock_deferred', 'total_stock_value', 'expenses', 'loan_advances', 'from_messages', 'from_this_person_to_poi', 'director_fees', 'deferred_income', 'long_term_incentive', 'from_poi_to_this_person'] # You will need to use more features
+features_list = ['poi','salary', 'to_messages', 'total_payments', 'exercised_stock_options', 'bonus', 'restricted_stock', 'shared_receipt_with_poi', 'total_stock_value', 'expenses', 'from_messages', 'from_this_person_to_poi', 'long_term_incentive', 'from_poi_to_this_person'] # You will need to use more features
 print("len of features are {0}".format(len(features_list)))
 
 ### Load the dictionary containing the dataset
 with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
-
 data_dict.pop('TOTAL')
 
-#for key in data_dict.keys(): print(key)
-#print(data_dict['GLISAN JR BEN F'])
+print type(data_dict['SKILLING JEFFREY K']['poi'])
+#print data_dict['METTS MARK']
+
+na_count = {'poi':{}, 'not': {}}
+for key in features_list[1:]:
+    na_count['poi'][key] = 0
+    na_count['not'][key] = 0
+count = 0
+for item in data_dict.values():
+    count += 1
+    for key in features_list[1:]:
+        if item[key] == 'NaN' :
+            if item['poi'] :
+                na_count['poi'][key] += 1
+            else: 
+                na_count['not'][key] += 1
+
+print count
+print na_count
+print len(data_dict)
 
 ### Task 2: Remove outliers
-data_nona = {}
-dict_keys = data_dict['GLISAN JR BEN F'].keys()
-print dict_keys.sort
+data = featureFormat(data_dict, features_list)
+
+print data.shape
+print type(data)
+
+
+
 #for key in data_dict.keys():
 
 
@@ -78,6 +101,7 @@ from sklearn import metrics as mtr
 features_train, features_test, labels_train, labels_test = \
     train_test_split(features, labels, test_size=0.3, random_state=42)
 
+'''
 clf1.fit(features_train, labels_train)
 print "GNB score is : ", clf1.score(features_test, labels_test)
 pred1 = clf1.predict(features_test)
@@ -113,6 +137,7 @@ print "SVM score is : ", clf6.score(features_test, labels_test)
 pred6 = clf6.predict(features_test)
 print "SVM precision is : ", mtr.precision_score(labels_test, pred6)
 print "SVM recall is : ", mtr.recall_score(labels_test, pred6)
+'''
 
 ### Task 6: Dump your classifier, dataset, and features_list so anyone can
 ### check your results. You do not need to change anything below, but make sure
