@@ -14,14 +14,14 @@ from my_defs import getFrac
 ### features_list is a list of strings, each of which is a feature name.
 ### The first feature must be "poi".
 features_list = ['poi','salary', 'to_messages', 'total_payments', 'exercised_stock_options', 'bonus', 'restricted_stock', 'shared_receipt_with_poi', 'total_stock_value', 'expenses', 'from_messages', 'from_this_person_to_poi', 'from_poi_to_this_person'] # You will need to use more features
-print("len of features are {0}".format(len(features_list)))
+#print("len of features are {0}".format(len(features_list)))
 
 ### Load the dictionary containing the dataset
 with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
 data_dict.pop('TOTAL')
 
-#print data_dict['METTS MARK']
+#print len(data_dict['METTS MARK'])
 
 features_list.append('to_frac')
 features_list.append('from_frac')
@@ -52,13 +52,14 @@ features_list.remove('from_poi_to_this_person')
 features_list.remove('to_messages')
 features_list.remove('from_this_person_to_poi')
 features_list.remove('from_messages')
-print features_list
+print("len of features are {0}".format(len(features_list)))
 
-data_modf = {}
-for key, value in data_dict.items():
-    for i in features_list:
-        if data_modf[item][key] == 'NaN':
-            data_modf[item][key] = mean[key]
+#print "len of dict", len(data_dict)
+# this step is well done
+for i in data_dict.keys():
+    for j in features_list:
+        if data_dict[i][j] == 'NaN':
+            data_dict[i][j] = mean[j]
 
 '''
 for i in features_list[1:7]:
