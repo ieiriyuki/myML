@@ -23,6 +23,9 @@ data_dict.pop('TOTAL')
 
 #print data_dict['METTS MARK']
 
+features_list.append('to_frac')
+features_list.append('from_frac')
+
 na_count = {}
 mean = {}
 var = {}
@@ -30,13 +33,14 @@ for key in features_list[1:]:
     na_count[key] = mean[key] = var[key] = []
 
 for key, value in data_dict.items():
-    data_dict[key]['from_frac'] = getFrac(value['from_this_person_to_poi'],value['from_messages'])
     data_dict[key]['to_frac'] = getFrac(value['from_poi_to_this_person'],value['to_messages'])
+    data_dict[key]['from_frac'] = getFrac(value['from_this_person_to_poi'],value['from_messages'])
     for j in features_list[1:]:
         if value[j] != 'NaN':
             na_count[j].append(value[j])
-#print na_count
+#print na_count['to_frac']
 #print type(na_count['not']['bonus'][0])
+#print data_dict['METTS MARK']
 
 for key in features_list[1:]:
     mean[key] = np.mean(na_count[key])
@@ -44,22 +48,17 @@ for key in features_list[1:]:
 #print mean
 #print var
 
-data_modf = data_dict
-for item in data_dict.keys():
-    for key in features_list[1:]:
+features_list.remove('from_poi_to_this_person')
+features_list.remove('to_messages')
+features_list.remove('from_this_person_to_poi')
+features_list.remove('from_messages')
+print features_list
+
+data_modf = {}
+for key, value in data_dict.items():
+    for i in features_list:
         if data_modf[item][key] == 'NaN':
             data_modf[item][key] = mean[key]
-
-na_count = {}
-for key in features_list[1:]:
-    na_count[key] = 0
-
-for item in data_dict.values():
-    for key in features_list[1:]:
-        if item[key] == 'NaN':
-            na_count[key] += 1
-
-print na_count
 
 '''
 for i in features_list[1:7]:
