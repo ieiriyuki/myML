@@ -8,6 +8,7 @@ from feature_format import featureFormat, targetFeatureSplit
 from tester import dump_classifier_and_data
 import numpy as np
 import matplotlib.pyplot as plt
+from my_defs import getFrac
 
 ### Task 1: Select what features you'll use.
 ### features_list is a list of strings, each of which is a feature name.
@@ -28,10 +29,12 @@ var = {}
 for key in features_list[1:]:
     na_count[key] = mean[key] = var[key] = []
 
-for item in data_dict.values():
-    for key in features_list[1:]:
-        if item[key] != 'NaN':
-            na_count[key].append(item[key])
+for key, value in data_dict.items():
+    data_dict[key]['from_frac'] = getFrac(value['from_this_person_to_poi'],value['from_messages'])
+    data_dict[key]['to_frac'] = getFrac(value['from_poi_to_this_person'],value['to_messages'])
+    for j in features_list[1:]:
+        if value[j] != 'NaN':
+            na_count[j].append(value[j])
 #print na_count
 #print type(na_count['not']['bonus'][0])
 
