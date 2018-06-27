@@ -1,0 +1,15 @@
+model,score,precision,recall,Acc,Prec,Reca,F1,F2,15000,C,P,N
+GNB,0.863636364,0.25,0.25,0.84687,0.38279,0.2425,0.29691,0.26168,T,P,485,1515
+,,,,,,,,,,N,782,12218
+LR,0.772727273,0.142857143,0.2,0.7322,0.03717,0.0405,0.03877,0.03979,15000,C,P,N
+,C=1.0,pneal='l2',,,,,,,T,P,81,1919
+,,,,,,,,,,N,2098,10902
+RF,0.909090909,1,0.2,0.86327,0.46256,0.1575,0.23499,0.18143,15000,C,P,N
+,ma_dep=None,ma_fea='auto',ma_le_no=None,,,,,,T,P,315,1685
+,min_samples_leaf=1, min_samples_split=2,n_est=10,,,,,,,N,366,12634
+AB,0.795454545,0.25,0.4,0.82747,0.32051,0.2625,0.28862,0.27236,15000,C,P,N
+,algorithm='SAMME.R',base_estimator=None,n_estimators=50,learning_rate=1.0,,,,,T,P,525,1475
+,,,,,,,,,,N,1113,11887
+GB,0.840909091,0.25,0.2,0.8558,0.43958,0.2965,0.35414,0.31715,15000,C,P,N
+,criterion='friedman_mse',learning_rate=0.1,loss='deviance',max_depth=3,,,,,T,P,593,1407
+,max_features=None,max_leaf_nodes=None,min_samples_leaf=1,min_samples_split=2,n_estimators=100,,,,,N,756,12244
