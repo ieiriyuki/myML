@@ -9,12 +9,24 @@ from tester import dump_classifier_and_data, test_classifier
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
-from my_defs import getFrac
+
+def getFrac(nom, denom):
+    frac = 'NaN'
+    if denom == 'NaN':
+        return frac
+    elif denom == 0:
+        return 0.
+    else:
+        if nom == 'NaN':
+            return 0.
+        else:
+            frac = float(nom)/denom
+    return frac
 
 ### Task 1: Select what features you'll use.
 ### features_list is a list of strings, each of which is a feature name.
 ### The first feature must be "poi".
-features_list = ['poi','salary', 'to_messages', 'total_payments', 'bonus', 'shared_receipt_with_poi', 'total_stock_value', 'expenses', 'from_messages', 'from_this_person_to_poi', 'from_poi_to_this_person'] # You will need to use more features
+features_list = ['poi','salary', 'to_messages', 'total_payments', 'bonus', 'restricted_stock', 'shared_receipt_with_poi', 'total_stock_value', 'expenses', 'from_messages', 'from_this_person_to_poi', 'from_poi_to_this_person'] # You will need to use more features
 #print("len of features are {0}".format(len(features_list)))
 
 ### Load the dictionary containing the dataset
@@ -23,7 +35,7 @@ with open("final_project_dataset.pkl", "r") as data_file:
 
 ### Task 2: Remove outliers
 data_dict.pop('TOTAL')
-#print len(data_dict['METTS MARK'])
+#print data_dict['METTS MARK']
 
 ### Task 3: Create new feature(s)
 ### Store to my_dataset for easy export below.
@@ -36,7 +48,7 @@ features_list.append('from_frac')
 na_count, mean, var, sd = {}, {}, {}, {}
 for key in features_list[1:]:
     na_count[key] = []
-    mean[key] = var[key] = sd[key] = 0
+    mean[key], var[key], sd[key] = 0, 0, 0
 
 for key, value in my_dataset.items():
     my_dataset[key]['to_frac'] = getFrac(value['from_poi_to_this_person'],value['to_messages'])
@@ -67,20 +79,24 @@ for i in my_dataset.keys():
         if my_dataset[i][j] == 'NaN':
             my_dataset[i][j] = mean[j]
 
+for i in my_dataset.keys():
+    for j in features_list[1:]:
+        my_dataset[i][j] = (my_dataset[i][j] - mean[j])/sd[j]
+
 ### Extract features and labels from dataset for local testing
 data = featureFormat(my_dataset, features_list, sort_keys = True)
 labels, features = targetFeatureSplit(data)
 
-print "label len is {0}".format(len(labels))
-print "features len is {0}".format(len(features))
-print "# of poi is : {0}".format(sum(labels))
+#print "label len is {0}".format(len(labels))
+#print "features len is {0}".format(len(features))
+#print "# of poi is : {0}".format(sum(labels))
 
 scaler = StandardScaler()
 scaler.fit(features)
 #print scaler.mean_
-#print np.mean(scaler.transform(features), axis=0)
-#print np.var(scaler.transform(features), axis=0)
-my__features = scaler.transform(features)
+#print np.mean(features, axis=0)
+#print np.var(features, axis=0)
+#my__features = scaler.transform(features)
 
 ### Task 4: Try a varity of classifiers
 ### Please name your classifier clf for easy export below.
