@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 ### Task 1: Select what features you'll use.
 ### features_list is a list of strings, each of which is a feature name.
 ### The first feature must be "poi".
-features_list = ['poi','salary', 'to_messages', 'total_payments', 'exercised_stock_options', 'bonus', 'restricted_stock', 'shared_receipt_with_poi', 'total_stock_value', 'expenses', 'from_messages', 'from_this_person_to_poi', 'long_term_incentive', 'from_poi_to_this_person'] # You will need to use more features
+features_list = ['poi','salary', 'to_messages', 'total_payments', 'exercised_stock_options', 'bonus', 'restricted_stock', 'shared_receipt_with_poi', 'total_stock_value', 'expenses', 'from_messages', 'from_this_person_to_poi', 'from_poi_to_this_person'] # You will need to use more features
 print("len of features are {0}".format(len(features_list)))
 
 ### Load the dictionary containing the dataset
@@ -20,26 +20,52 @@ with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
 data_dict.pop('TOTAL')
 
-print type(data_dict['SKILLING JEFFREY K']['poi'])
 #print data_dict['METTS MARK']
 
-na_count = {'poi':{}, 'not': {}}
+na_count = {}
+mean = {}
+var = {}
 for key in features_list[1:]:
-    na_count['poi'][key] = 0
-    na_count['not'][key] = 0
-count = 0
-for item in data_dict.values():
-    count += 1
-    for key in features_list[1:]:
-        if item[key] == 'NaN' :
-            if item['poi'] :
-                na_count['poi'][key] += 1
-            else: 
-                na_count['not'][key] += 1
+    na_count[key] = mean[key] = var[key] = []
 
-print count
+for item in data_dict.values():
+    for key in features_list[1:]:
+        if item[key] != 'NaN':
+            na_count[key].append(item[key])
+#print na_count
+#print type(na_count['not']['bonus'][0])
+
+for key in features_list[1:]:
+    mean[key] = np.mean(na_count[key])
+    var[key] = np.var(na_count[key])
+#print mean
+#print var
+
+data_modf = data_dict
+for item in data_dict.keys():
+    for key in features_list[1:]:
+        if data_modf[item][key] == 'NaN':
+            data_modf[item][key] = mean[key]
+
+na_count = {}
+for key in features_list[1:]:
+    na_count[key] = 0
+
+for item in data_dict.values():
+    for key in features_list[1:]:
+        if item[key] == 'NaN':
+            na_count[key] += 1
+
 print na_count
-print len(data_dict)
+
+'''
+for i in features_list[1:7]:
+    for j in features_list[7:14]:
+        if i == j:
+            continue
+        plt.scatter(na_count['poi'][i], na_count['poi'][j])
+        plt.scatter(na_count['not'][i], na_count['not'][j])
+'''
 
 ### Task 2: Remove outliers
 data = featureFormat(data_dict, features_list)

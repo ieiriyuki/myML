@@ -1,8 +1,14 @@
 all
-{'salary': 51, 'to_messages': 59, 'total_payments': 21, 'bonus': 64, 'total_stock_value': 20, 'shared_receipt_with_poi': 59, 'exercised_stock_options': 44, 'from_messages': 59, 'from_this_person_to_poi': 59, 'long_term_incentive': 80, 'expenses': 51, 'restricted_stock': 36, 'from_poi_to_this_person': 59}
+{'salary': 51, 'to_messages': 59, 'total_payments': 21, 'bonus': 64, 'total_stock_value': 20, 'shared_receipt_with_poi': 59, 'exercised_stock_options': 44, 'from_messages': 59, 'from_this_person_to_poi': 59, 'expenses': 51, 'restricted_stock': 36, 'from_poi_to_this_person': 59}
 
 poi
-{'salary': 1, 'to_messages': 4, 'total_payments': 0, 'bonus': 2, 'total_stock_value': 0, 'shared_receipt_with_poi': 4, 'exercised_stock_options': 6, 'from_messages': 4, 'from_this_person_to_poi': 4, 'long_term_incentive': 6, 'expenses': 0, 'restricted_stock': 1, 'from_poi_to_this_person': 4}
+{'salary': 1, 'to_messages': 4, 'total_payments': 0, 'bonus': 2, 'total_stock_value': 0, 'shared_receipt_with_poi': 4, 'exercised_stock_options': 6, 'from_messages': 4, 'from_this_person_to_poi': 4, 'expenses': 0, 'restricted_stock': 1, 'from_poi_to_this_person': 4}
 
 not
-{'salary': 50, 'to_messages': 55, 'total_payments': 21, 'bonus': 62, 'total_stock_value': 20, 'shared_receipt_with_poi': 55, 'exercised_stock_options': 38, 'from_messages': 55, 'from_this_person_to_poi': 55, 'long_term_incentive': 74, 'expenses': 51, 'restricted_stock': 35, 'from_poi_to_this_person': 55}
+{'salary': 50, 'to_messages': 55, 'total_payments': 21, 'bonus': 62, 'total_stock_value': 20, 'shared_receipt_with_poi': 55, 'exercised_stock_options': 38, 'from_messages': 55, 'from_this_person_to_poi': 55, 'expenses': 51, 'restricted_stock': 35, 'from_poi_to_this_person': 55}
+
+mean
+{'salary': '284087.5425531915', 'to_messages': '2073.860465116279', 'total_payments': '2623421.1774193547', 'bonus': '1201773.0740740742', 'total_stock_value': '3352073.024', 'shared_receipt_with_poi': '1176.4651162790697', 'exercised_stock_options': '2959559.2574257427', 'from_messages': '608.7906976744187', 'from_this_person_to_poi': '41.23255813953488', 'expenses': '54192.01063829787', 'restricted_stock': '1147424.0917431193', 'from_poi_to_this_person': '64.8953488372093'}
+
+var
+{'salary': '31041650843.014145', 'to_messages': '6592782.213088156', 'total_payments': '89298145443404.27', 'bonus': '2052779854719.4514', 'total_stock_value': '42337133069195.01', 'shared_receipt_with_poi': '1372287.8999459164', 'exercised_stock_options': '29944500883047.895', 'from_messages': '3349994.3050297457', 'from_this_person_to_poi': '9898.178474851273', 'expenses': '2103365636.6275463', 'restricted_stock': '5015031184866.451', 'from_poi_to_this_person': '7477.419280692265'}
